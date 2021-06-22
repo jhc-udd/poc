@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql
+  namespace: poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssql
+  template:
+    metadata:
+      labels:
+        app: mssql
+    spec:
+      containers:
+      - name: mssql
+        image: jhidalgoc/mssql:latest
+        securityContext:
+            privileged: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql
+  namespace: poc
+spec:
+  type: NodePort
+  ports:
+  - port: 1433
+    targetPort: 1433
+    name: mssql-port
+  selector:
+    app: mssql
+
