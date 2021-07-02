@@ -42,7 +42,7 @@ spec:
     http:
       paths:
       -
-        path: /poc
+        path: /mvcmovie
         pathType: Prefix
         backend:
           service:

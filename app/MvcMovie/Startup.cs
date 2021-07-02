@@ -40,12 +40,12 @@ namespace MvcMovie
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/mvcmovie/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
 
 		//app.UsePathBase(Configuration.GetValue<string>("SubPath"));
-		app.UsePathBase("mvcmovie");
+		app.UsePathBase("/mvcmovie");
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
