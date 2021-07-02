@@ -23,7 +23,7 @@ metadata:
   name: poc-udd
   namespace: poc
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 8000
     targetPort: 80

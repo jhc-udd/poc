@@ -25,7 +25,7 @@ metadata:
   name: mssql
   namespace: poc
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 1433
     targetPort: 1433
