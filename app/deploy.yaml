@@ -30,4 +30,23 @@ spec:
     name: poc-udd-port
   selector:
     app: poc-udd
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: poc-ingress
+  namespace: poc
+spec:
+  rules:
+  - host: k8s-apps-previos.udd.net
+    http:
+      paths:
+      -
+        path: /poc
+        pathType: Prefix
+        backend:
+          service:
+            name: poc-udd
+            port:
+              number: 8000
 
