@@ -1,3 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mssql-nfs-pvc
+  namespace: poc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,6 +30,13 @@ spec:
         image: jhidalgoc/mssql:latest
         securityContext:
             privileged: true
+        volumeMounts:
+        - name: mssql-nfs-pvc
+          mountPath: /data
+      volumes:
+      - name: mssql-nfs-pvc
+        persistentVolumeClaim:
+          claimName: mssql-nfs-pvc
 ---
 apiVersion: v1
 kind: Service
