@@ -55,7 +55,7 @@ pipeline {
         stage('Create DB And Tables') {
             steps {
                 sh 'while [[ $(kubectl get pods -n poc -l app=mssql -o "jsonpath={..status.conditions[?(@.type==\"Ready\")].status}") != "True" ]]; do echo "waiting for pod" && sleep 1; done'
-                sh 'kubectl exec deployments/mssql -n poc -- /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P4ssw0rd -Q "CREATE DATABASE demo ON (FILENAME=N\'/data(demo.mdf\'),  (FILENAME=N\'/data(demo.ldf\')"'
+                sh 'kubectl exec deployments/mssql -n poc -- /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P4ssw0rd -Q "CREATE DATABASE demo ON (FILENAME=N\'/data/demo.mdf\'),  (FILENAME=N\'/data/demo.ldf\')"'
 		sh 'kubectl exec deployments/mssql -n poc -- /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P4ssw0rd -d demo -Q "Create Table Movie([ID]  INT Identity (1,1) NOT NULL,[Genre] nvarchar(MAX) null,[Price] decimal(18,2) not null,[Rating] nvarchar(MAX) null,[ReleaseDate] datetime2 (7) not null,[Title] nvarchar(MAX) NULL,Constraint [PK_Movie] Primary Key Clustered ([ID] Asc))"'
             }
         }
