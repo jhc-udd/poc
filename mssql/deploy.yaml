@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: mssql-nfs-pvc
   namespace: poc
-  label:
+  labels:
     app: movies-bd
     vesion: v1
 spec:
@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: mssql
   namespace: poc
-  label:
+  labels:
     app: movies-bd
     version: v1
 spec:
@@ -65,7 +65,7 @@ kind: Service
 metadata:
   name: mssql
   namespace: poc
-  label:
+  labels:
     app: movies-bd
     version: v1
 spec:

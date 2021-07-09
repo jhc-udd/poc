@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: poc-udd
   namespace: poc
-  label:
+  labels:
     app: movies-app
     version: v1
 spec:
@@ -27,7 +27,7 @@ kind: Service
 metadata:
   name: poc-udd
   namespace: poc
-  label:
+  labels:
     app: movies-app
 spec:
   type: ClusterIP
