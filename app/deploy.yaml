@@ -3,15 +3,20 @@ kind: Deployment
 metadata:
   name: poc-udd
   namespace: poc
+  label:
+    app: movies-app
+    version: v1
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: poc-udd
+      app: movies-app
+      version: v1
   template:
     metadata:
       labels:
-        app: poc-udd
+        app: movies-app
+        version: v1
     spec:
       containers:
       - name: poc-udd
@@ -22,6 +27,8 @@ kind: Service
 metadata:
   name: poc-udd
   namespace: poc
+  label:
+    app: movies-app
 spec:
   type: ClusterIP
   ports:
