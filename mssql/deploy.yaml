@@ -41,7 +41,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "P4ssw0rd", "-Q", "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'demo') BEGIN CREATE DATABASE demo ON (FILENAME=N'/data/demo.mdf'), (FILENAME=N'/data/demo.ldf') FOR ATTACH; END"]
+              command: ["/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "P4ssw0rd", "-i", "/opt/scripts/load.sql"]
         volumeMounts:
         - name: mssql-nfs-pvc
           mountPath: /data
