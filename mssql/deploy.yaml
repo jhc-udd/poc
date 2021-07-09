@@ -62,7 +62,7 @@ spec:
   ports:
   - port: 1433
     targetPort: 1433
-    name: mssql-port
+    name: tcp-1433
   selector:
     app: mssql
 
