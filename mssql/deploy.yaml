@@ -38,10 +38,10 @@ spec:
         image: jhidalgoc/mssql:latest
         securityContext:
           privileged: true        
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/opt/scripts/install_bd.sh"]
+        #lifecycle:
+        #  postStart:
+        #    exec:
+        #      command: ["/opt/scripts/install_bd.sh"]
         volumeMounts:
         - name: mssql-nfs-pvc
           mountPath: /data
