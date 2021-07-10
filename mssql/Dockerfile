@@ -24,13 +24,14 @@ RUN echo "  FOR ATTACH"                                                       >>
 RUN echo "END"                                                                >> /opt/scripts/load.sql
 RUN echo "GO"                                                                 >> /opt/scripts/load.sql
 
-RUN echo "#!/bin/bash"                                                                  > /opt/scripts/install_bd.sh
-RUN echo "if test -f '/data/demo.mdf'; then"                                            > /opt/scripts/install_bd.sh
-RUN echo "  /opt/mssql-tools/bin/sqlcmd -U sa -P P4ssw0rd -i /opt/scripts/load.sql"     >> /opt/scripts/install_bd.sh
-RUN echo "else"                                                                         >> /opt/scripts/install_bd.sh
-RUN echo "  /opt/mssql-tools/bin/sqlcmd -U sa -P P4ssw0rd -i /opt/scripts/install.sql"  >> /opt/scripts/install_bd.sh
-RUN echo "fi"                                                                           >> /opt/scripts/install_bd.sh
+RUN echo "#!/bin/bash"                                                                  > /opt/scripts/install_and_test_bd.sh
+RUN echo "if test -f '/data/demo.mdf'; then"                                            > /opt/scripts/install_and_test_bd.sh
+RUN echo "  /opt/mssql-tools/bin/sqlcmd -U sa -P P4ssw0rd -i /opt/scripts/load.sql"     >> /opt/scripts/install_and_test_bd.sh
+RUN echo "else"                                                                         >> /opt/scripts/install_and_test_bd.sh
+RUN echo "  /opt/mssql-tools/bin/sqlcmd -U sa -P P4ssw0rd -i /opt/scripts/install.sql"  >> /opt/scripts/install_and_test_bd.sh
+RUN echo "fi"                                                                           >> /opt/scripts/install_and_test_bd.sh
+RUN echo "/opt/mssql-tools/bin/sqlcmd -U sa -P P4ssw0rd -Q 'SELECT 1'"                  >> /opt/scripts/install_and_test_bd.sh
 
-RUN chmod +x /opt/scripts/install_bd.sh
+RUN chmod +x /opt/scripts/install_and_test_bd.sh
 
 CMD mkdir /data
