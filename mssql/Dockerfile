@@ -12,6 +12,15 @@ RUN echo "BEGIN"                                                              >>
 RUN echo "  CREATE DATABASE demo"                                             >> /opt/scripts/install.sql
 RUN echo "  ON (NAME=demo_dat,FILENAME=N'/data/demo.mdf')"                    >> /opt/scripts/install.sql
 RUN echo "  LOG ON (NAME=demo_log, FILENAME=N'/data/demo.ldf')"               >> /opt/scripts/install.sql
+RUN echo "  CREATE TABLE Movie ("                                             >> /opt/scripts/install.sql
+RUN echo "   [ID]  INT Identity (1,1) NOT NULL,"                              >> /opt/scripts/install.sql
+RUN echo "   [Genre] nvarchar(MAX) null,"                                     >> /opt/scripts/install.sql
+RUN echo "   [Price] decimal(18,2) not null,"                                 >> /opt/scripts/install.sql
+RUN echo "   [Rating] nvarchar(MAX) null,"                                    >> /opt/scripts/install.sql
+RUN echo "   [ReleaseDate] datetime2 (7) not null,"                           >> /opt/scripts/install.sql
+RUN echo "   [Title] nvarchar(MAX) NULL,"                                     >> /opt/scripts/install.sql
+RUN echo "   Constraint [PK_Movie] Primary Key Clustered ([ID] Asc)"          >> /opt/scripts/install.sql
+RUN echo " )"                                                                 >> /opt/scripts/install.sql
 RUN echo "END"                                                                >> /opt/scripts/install.sql
 RUN echo "GO"                                                                 >> /opt/scripts/install.sql
 
