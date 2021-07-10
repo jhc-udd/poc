@@ -41,7 +41,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "P4ssw0rd", "-i", "/opt/scripts/load.sql"]
+              command: ["/opt/scripts/install_bd.sh"]
         volumeMounts:
         - name: mssql-nfs-pvc
           mountPath: /data
