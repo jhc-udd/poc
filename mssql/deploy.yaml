@@ -53,8 +53,9 @@ spec:
           timeoutSeconds: 5
         readinessProbe:
           exec:
+            #command: ["/bin/sh"]
             command: ["/bin/sh", "/opt/scripts/install_and_test_bd.sh"]
-          initialDelaySeconds: 5
+          initialDelaySeconds: 10
           periodSeconds: 2
           timeoutSeconds: 1
       volumes:
