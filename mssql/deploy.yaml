@@ -78,5 +78,5 @@ spec:
     targetPort: 1433
     name: tcp-1433
   selector:
-    app: mssql
+    app: movies-bd
 
