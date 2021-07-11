@@ -36,7 +36,7 @@ spec:
     targetPort: 80
     name: tcp-8000
   selector:
-    app: poc-udd
+    app: movies-app
 ---
 kind: Ingress
 apiVersion: networking.k8s.io/v1
