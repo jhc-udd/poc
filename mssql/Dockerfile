@@ -46,7 +46,7 @@ RUN echo "/opt/mssql-tools/bin/sqlcmd -U sa -P P4ssw0rd -Q 'SELECT 1'"          
 
 RUN chmod +x /opt/scripts/install_and_test_bd.sh
 
-RUN mkdir /data
+CMD mkdir /data
 
 ENTRYPOINT /opt/mssql/bin/sqlservr
 
