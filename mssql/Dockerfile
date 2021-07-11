@@ -3,9 +3,8 @@ FROM mcr.microsoft.com/mssql/server:2019-latest
 ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=P4ssw0rd
 
-USER root
-
-RUN apt-get update && apt-get install -y vim curl
+#USER root
+#RUN apt-get update && apt-get install -y vim curl
 
 RUN mkdir -p /opt/scripts
 
