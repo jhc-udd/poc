@@ -1,5 +1,13 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: movies-bd
+  namespace: poc
+  labels:
+    account: movies-bd
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: mssql-nfs-pvc
   namespace: poc
@@ -13,14 +21,31 @@ spec:
     requests:
       storage: 10Gi
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: movies-bd
+  namespace: poc
+  labels:
+    app: movies-bd
+    service: database
+spec:
+  type: ClusterIP
+  ports:
+  - port: 1433
+    targetPort: 1433
+    name: tcp
+  selector:
+    app: movies-bd
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mssql-bd
   namespace: poc
-  #labels:
-  #  app: movies-bd
-  #  version: v1
+  labels:
+    app: movies-bd
+    version: v1
 spec:
   replicas: 1
   selector:
@@ -33,15 +58,12 @@ spec:
         app: movies-bd
         version: v1
     spec:
+      serviceAccountName: movies-bd
       containers:
       - name: mssql
         image: jhidalgoc/mssql:latest
         securityContext:
           runAsUser: 1000
-        #lifecycle:
-        #  postStart:
-        #    exec:
-        #      command: ["/opt/scripts/install_and_test_bd.sh"]
         volumeMounts:
         - name: mssql-nfs-pvc
           mountPath: /data
@@ -64,23 +86,3 @@ spec:
       - name: mssql-nfs-pvc
         persistentVolumeClaim:
           claimName: mssql-nfs-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: movies-bd
-  namespace: poc
-  labels:
-    app: movies-bd
-    version: v1
-    service: database
-spec:
-  type: ClusterIP
-  ports:
-  - port: 1433
-    targetPort: 1433
-    name: tcp-1433
-  selector:
-    app: movies-bd
-    version: v1
-

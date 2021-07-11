@@ -60,7 +60,11 @@ pipeline {
 
         stage('Apply Demo Deployment') {
             steps {
-                sh 'cd app && kubectl apply -f deploy.yaml'
+                sh 'cd app && kubectl apply -f serviceaccount.yaml'
+                sh 'cd app && kubectl apply -f service.yaml'
+                sh 'cd app && kubectl apply -f deploy-v1.yaml'
+                sh 'cd app && kubectl apply -f deploy-v2.yaml'
+                sh 'cd app && kubectl apply -f ingress.yaml'
             }
         }
 

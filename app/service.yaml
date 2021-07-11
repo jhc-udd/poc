@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: movies-app
+  namespace: poc
+  labels:
+    app: movies-app
+    service: frontend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+    targetPort: 80
+    name: http
+  selector:
+    app: movies-app

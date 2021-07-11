@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movies-app.v1
+  namespace: poc
+  labels:
+    app: movies-app
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: movies-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: movies-app
+        version: v1
+    spec:
+      serviceAccountName: movies-app
+      containers:
+      - name: poc-udd
+        image: jhidalgoc/poc-udd:latest
+        ports:
+          - containerPort: 80        
