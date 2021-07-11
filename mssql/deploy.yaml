@@ -16,11 +16,11 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mssql
+  name: mssql-bd
   namespace: poc
-  labels:
-    app: movies-bd
-    version: v1
+  #labels:
+  #  app: movies-bd
+  #  version: v1
 spec:
   replicas: 1
   selector:
@@ -37,7 +37,7 @@ spec:
       - name: mssql
         image: jhidalgoc/mssql:latest
         securityContext:
-          privileged: true        
+          runAsUser: 1000
         #lifecycle:
         #  postStart:
         #    exec:
@@ -58,6 +58,8 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 2
           timeoutSeconds: 1
+        ports:
+          - containerPort: 1433
       volumes:
       - name: mssql-nfs-pvc
         persistentVolumeClaim:
@@ -66,11 +68,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql
+  name: movies-bd
   namespace: poc
   labels:
     app: movies-bd
     version: v1
+    service: database
 spec:
   type: ClusterIP
   ports:
@@ -79,4 +82,5 @@ spec:
     name: tcp-1433
   selector:
     app: movies-bd
+    version: v1
 
