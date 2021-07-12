@@ -61,7 +61,7 @@ spec:
       serviceAccountName: movies-bd
       containers:
       - name: mssql
-        image: jhidalgoc/mssql:latest
+        image: k8s-previos.udd.net/nexus/repository/udd-previos-registry/mssql:latest
         securityContext:
           runAsUser: 1000
         volumeMounts:

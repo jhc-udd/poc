@@ -21,6 +21,6 @@ spec:
       serviceAccountName: movies-app
       containers:
       - name: poc-udd
-        image: jhidalgoc/poc-udd:latest
+        image: k8s-previos.udd.net/nexus/repository/udd-previos-registry/poc-udd:latest
         ports:
           - containerPort: 80        
