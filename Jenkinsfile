@@ -2,9 +2,11 @@ pipeline {
     agent {label 'docker'}
 
     environment {
+        REGISTRY="k8s-previos.udd.net"
+        PATH_IMAGE="k8s-previos.udd.net/nexus/repository/udd-previos-registry"
         PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-        DOCKER_USER = credentials('user-dockerhub')
-        DOCKER_PASS = credentials('pass-dockerhub')
+        DOCKER_USER = credentials('user-registry')
+        DOCKER_PASS = credentials('pass-registry')
     }
 
     stages {
@@ -16,27 +18,27 @@ pipeline {
 
         stage('Build MsSQL Image') {
             steps {
-                sh 'cd mssql && docker build -t jhidalgoc/mssql:latest .'
+                sh 'cd mssql && docker build -t $PATH_IMAGE/mssql:latest .'
             }
         }
 
         stage('Build Demo Image') {
             steps {
-                sh 'cd app && docker build -t jhidalgoc/poc-udd:latest .'
+                sh 'cd app && docker build -t $PATH_IMAGE//poc-udd:latest .'
             }
         }
 
         stage('Push MsSQL Image') {
             steps {
-                sh 'echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin'
-                sh 'docker push jhidalgoc/mssql:latest'
+                sh 'echo $DOCKER_PASS | docker login $REGISTRY --username $DOCKER_USER --password-stdin'
+                sh 'docker push $PATH_IMAGE/mssql:latest'
             }
         }
 
         stage('Push Demo Image') {
             steps {
-                sh 'echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin'
-                sh 'docker push jhidalgoc/poc-udd:latest'
+                sh 'echo $DOCKER_PASS | docker login $REGISTRY --username $DOCKER_USER --password-stdin'
+                sh 'docker push $PATH_IMAGE/poc-udd:latest'
             }
         }
 
