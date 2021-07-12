@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build Demo Image') {
             steps {
-                sh 'cd app && docker build -t $PATH_IMAGE//poc-udd:latest .'
+                sh 'cd app && docker build -t $PATH_IMAGE/poc-udd:latest .'
             }
         }
 
