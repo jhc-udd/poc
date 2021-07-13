@@ -19,6 +19,8 @@ spec:
         version: v1
     spec:
       serviceAccountName: movies-app
+      imagePullSecrets:
+      - name: registry-credentials
       containers:
       - name: poc-udd
         image: k8s-previos.udd.net/nexus/repository/udd-previos-registry/poc-udd:latest

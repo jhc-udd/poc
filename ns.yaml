@@ -4,4 +4,13 @@ metadata:
   name: poc
   labels:
     istio-injection: enabled
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-credentials 
+  namespace: poc
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJrOHMtcHJldmlvcy51ZGQubmV0IjogewoJCQkiYXV0aCI6ICJZV1J0YVc0Nk5XUmtNbXN4IgoJCX0KCX0KfQo=
+type: kubernetes.io/dockerconfigjson
 

@@ -59,6 +59,8 @@ spec:
         version: v1
     spec:
       serviceAccountName: movies-bd
+      imagePullSecrets:
+      - name: registry-credentials
       containers:
       - name: mssql
         image: k8s-previos.udd.net/nexus/repository/udd-previos-registry/mssql:latest
