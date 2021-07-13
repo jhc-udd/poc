@@ -13,7 +13,8 @@ WORKDIR /source/MvcMovie
 RUN dotnet publish -c release -o /app 
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/sdk:5.0
+#FROM mcr.microsoft.com/dotnet/sdk:5.0
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app ./
 ENV ASPNETCORE_URLS=http://+:80  
