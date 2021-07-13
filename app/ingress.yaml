@@ -4,6 +4,9 @@ metadata:
   name: poc-ingress
   namespace: poc
 spec:
+  tls:
+  - hosts:
+      - k8s-apps-previos.udd.net
   rules:
   - host: k8s-apps-previos.udd.net
     http:
